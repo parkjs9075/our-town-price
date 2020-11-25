@@ -1,0 +1,1 @@
+C:\Users\lovel\IdeaProjects\our-town-price\web.api\build\classes\kotlin\main\com\ourtown\OurtownApplication.class;C:\Users\lovel\IdeaProjects\our-town-price\web.api\build\classes\kotlin\main\com\ourtown\OurtownApplicationKt.class
