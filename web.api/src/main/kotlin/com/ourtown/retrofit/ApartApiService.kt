@@ -10,10 +10,17 @@ import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface  ApartApiService {
-    @GET("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSilvTrade")
+    @GET("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade")
     fun getData(
-            @Query("LAWD_CD") LAWD_CD: String,
-            @Query("DEAL_YMD") DEAL_YMD: String,
-            @Query("serviceKey") serviceKey: String
+        @Query("LAWD_CD") LAWD_CD: String,
+        @Query("DEAL_YMD") DEAL_YMD: String,
+        @Query("serviceKey") serviceKey: String
+    ): Call<ApartResponse>
+
+    @GET("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSilvTrade")
+    fun getSubdivisions(
+        @Query("LAWD_CD") LAWD_CD: String,
+        @Query("DEAL_YMD") DEAL_YMD: String,
+        @Query("serviceKey") serviceKey: String
     ): Call<ApartResponse>
 }
