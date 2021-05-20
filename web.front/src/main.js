@@ -8,6 +8,7 @@ import axios from 'axios'
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+axios.defaults.withCredentials = true;
 
 new Vue({
   render: h => h(App),

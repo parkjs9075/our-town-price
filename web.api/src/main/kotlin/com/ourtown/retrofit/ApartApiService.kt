@@ -15,12 +15,12 @@ interface  ApartApiService {
         @Query("LAWD_CD") LAWD_CD: String,
         @Query("DEAL_YMD") DEAL_YMD: String,
         @Query("serviceKey") serviceKey: String
-    ): Call<ApartResponse>
+    ): Call<ApartSalesResponse>
 
     @GET("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSilvTrade")
     fun getSubdivisions(
         @Query("LAWD_CD") LAWD_CD: String,
         @Query("DEAL_YMD") DEAL_YMD: String,
         @Query("serviceKey") serviceKey: String
-    ): Call<ApartResponse>
+    ): Call<ApartSalesResponse>
 }

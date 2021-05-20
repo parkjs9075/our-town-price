@@ -5,9 +5,10 @@ import retrofit2.http.Field
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
+import java.time.LocalDate
 
 @Root(name = "response")
-class ApartResponse(
+class ApartSalesResponse(
     @field:Element(name = "header", required = false)
     var header: HeaderResponse = HeaderResponse(),
     @field:Element(name = "body", required = false)
@@ -43,7 +44,7 @@ data class ItemResponse(
 @Root(name = "item")
 data class ItemInfo(
     @field: Element(name = "년", required = false)
-    var salesYear: String? = "",
+    var salesYear: Int = LocalDate.now().year,
 
     @field: Element(name = "단지", required = false)
     var danji: String = "",
@@ -55,10 +56,10 @@ data class ItemInfo(
     var sigungu: String = "",
 
     @field: Element(name = "월", required = false)
-    var month: String = "",
+    var month: Int = LocalDate.now().month.value,
 
     @field: Element(name = "일", required = false)
-    var day: String = "",
+    var day: Int = LocalDate.now().dayOfMonth,
 
     @field: Element(name = "전용면적", required = false)
     var areaExclusiveUse: String = "",
