@@ -85,4 +85,20 @@ data class ItemInfo(
     @field: Element(name = "거래금액", required = false)
     var salesAmount: String = ""
         get() = field.replace(" ", "")
+
+    @field: Element(name = "거래유형", required = false)
+    var salesType: String = ""
+        get() = field.replace(" ", "")
+
+    @field: Element(name = "중개사소재지", required = false)
+    var salesArea: String = ""
+        get() = field.replace(" ", "")
+
+    @field: Element(name = "해제사유발생일", required = false)
+    var cancelDate: String = ""
+        get() = field.replace(" ", "")
+
+    @field: Element(name = "해제여부", required = false)
+    var isCancel: String = ""
+        get() = field.replace(" ", "")
 }

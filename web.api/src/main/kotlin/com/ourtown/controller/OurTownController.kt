@@ -1,799 +1,71 @@
 package com.ourtown.controller
+import com.ourtown.controller.model.ApartModel
+import com.ourtown.controller.model.ApartSalesInfo
 import com.ourtown.retrofit.ApartApiService
+import com.ourtown.retrofit.AreaCodeApiService
 import com.ourtown.retrofit.model.*
-import com.squareup.moshi.Json
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 @RequestMapping("/sales")
 @RestController
 class OurTownController {
-    @GetMapping("json")
-    fun getAreaCode(): String {
-        var sigungu_org = "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "서울특별시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "부산광역시\n" +
-            "대구광역시\n" +
-            "대구광역시\n" +
-            "대구광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "인천광역시\n" +
-            "광주광역시\n" +
-            "대전광역시\n" +
-            "대전광역시\n" +
-            "울산광역시\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "경기도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "강원도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청북도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "충청남도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라북도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "전라남도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상북도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "경상남도\n" +
-            "제주특별자치도\n" +
-            "제주특별자치도\n"
+    @GetMapping("areacode")
+    fun getAreaCode(
+        @RequestParam type: AreaCodeType,
+        @RequestParam code: String? = null
+    ): List<AreaCodeModel> {
+        val regCode = when(type) {
+            AreaCodeType.SI -> "*00000000"
+            AreaCodeType.GU -> {
+                if (code == null) return emptyList()
+                code.subSequence(0, 2).toString() + "*" + "00000"
+            }
+        }
 
-        val sigungu = sigungu_org.split("\n")
+        val call = areaCodeApiServiceForCall(API_URL_FOR_AREACODE)
+            .getData(regCode)
 
-        var gu_org = "종로구\n" +
-            "중구\n" +
-            "용산구\n" +
-            "성동구\n" +
-            "광진구\n" +
-            "동대문구\n" +
-            "중랑구\n" +
-            "성북구\n" +
-            "강북구\n" +
-            "도봉구\n" +
-            "노원구\n" +
-            "은평구\n" +
-            "서대문구\n" +
-            "마포구\n" +
-            "양천구\n" +
-            "강서구\n" +
-            "구로구\n" +
-            "금천구\n" +
-            "영등포구\n" +
-            "동작구\n" +
-            "관악구\n" +
-            "서초구\n" +
-            "강남구\n" +
-            "송파구\n" +
-            "강동구\n" +
-            "서구\n" +
-            "동구\n" +
-            "영도구\n" +
-            "부산진구\n" +
-            "동래구\n" +
-            "남구\n" +
-            "북구\n" +
-            "해운대구\n" +
-            "사하구\n" +
-            "금정구\n" +
-            "연제구\n" +
-            "수영구\n" +
-            "사상구\n" +
-            "기장군\n" +
-            "수성구\n" +
-            "달서구\n" +
-            "달성군\n" +
-            "중구영종출장\n" +
-            "중구용유출장\n" +
-            "미추홀구\n" +
-            "연수구\n" +
-            "남동구\n" +
-            "부평구\n" +
-            "계양구\n" +
-            "서구검단출장\n" +
-            "강화군\n" +
-            "옹진군\n" +
-            "광산구\n" +
-            "유성구\n" +
-            "대덕구\n" +
-            "울주군\n" +
-            "수원시\n" +
-            "수원시 장안구\n" +
-            "수원시 권선구\n" +
-            "수원시 팔달구\n" +
-            "수원시 영통구\n" +
-            "성남시\n" +
-            "성남시 수정구\n" +
-            "성남시 중원구\n" +
-            "성남시 분당구\n" +
-            "의정부시\n" +
-            "안양시\n" +
-            "안양시 만안구\n" +
-            "안양시 동안구\n" +
-            "부천시\n" +
-            "광명시\n" +
-            "평택시\n" +
-            "동두천시\n" +
-            "안산시\n" +
-            "안산시 상록구\n" +
-            "안산시 단원구\n" +
-            "고양시\n" +
-            "고양시 덕양구\n" +
-            "고양시 일산동구\n" +
-            "고양시 일산서구\n" +
-            "과천시\n" +
-            "구리시\n" +
-            "남양주시\n" +
-            "오산시\n" +
-            "시흥시\n" +
-            "군포시\n" +
-            "의왕시\n" +
-            "하남시\n" +
-            "용인시\n" +
-            "용인시 처인구\n" +
-            "용인시 기흥구\n" +
-            "용인시 수지구\n" +
-            "파주시\n" +
-            "이천시\n" +
-            "안성시\n" +
-            "김포시\n" +
-            "화성시\n" +
-            "광주시\n" +
-            "양주시\n" +
-            "포천시\n" +
-            "여주시\n" +
-            "연천군\n" +
-            "가평군\n" +
-            "양평군\n" +
-            "춘천시\n" +
-            "원주시\n" +
-            "강릉시\n" +
-            "동해시\n" +
-            "태백시\n" +
-            "속초시\n" +
-            "삼척시\n" +
-            "홍천군\n" +
-            "횡성군\n" +
-            "영월군\n" +
-            "평창군\n" +
-            "정선군\n" +
-            "철원군\n" +
-            "화천군\n" +
-            "양구군\n" +
-            "인제군\n" +
-            "고성군\n" +
-            "양양군\n" +
-            "청주시\n" +
-            "청주시 상당구\n" +
-            "청주시 서원구\n" +
-            "청주시 흥덕구\n" +
-            "청주시 청원구\n" +
-            "충주시\n" +
-            "제천시\n" +
-            "보은군\n" +
-            "옥천군\n" +
-            "영동군\n" +
-            "증평군\n" +
-            "진천군\n" +
-            "괴산군\n" +
-            "음성군\n" +
-            "단양군\n" +
-            "천안시\n" +
-            "천안시 동남구\n" +
-            "천안시 서북구\n" +
-            "공주시\n" +
-            "보령시\n" +
-            "아산시\n" +
-            "서산시\n" +
-            "논산시\n" +
-            "계룡시\n" +
-            "당진시\n" +
-            "금산군\n" +
-            "부여군\n" +
-            "서천군\n" +
-            "청양군\n" +
-            "홍성군\n" +
-            "예산군\n" +
-            "태안군\n" +
-            "전주시\n" +
-            "전주시 완산구\n" +
-            "전주시 덕진구\n" +
-            "전주시효자출\n" +
-            "군산시\n" +
-            "익산시\n" +
-            "익산시함열출\n" +
-            "정읍시\n" +
-            "남원시\n" +
-            "김제시\n" +
-            "완주군\n" +
-            "진안군\n" +
-            "무주군\n" +
-            "장수군\n" +
-            "임실군\n" +
-            "순창군\n" +
-            "고창군\n" +
-            "부안군\n" +
-            "목포시\n" +
-            "여수시\n" +
-            "순천시\n" +
-            "나주시\n" +
-            "광양시\n" +
-            "담양군\n" +
-            "곡성군\n" +
-            "구례군\n" +
-            "고흥군\n" +
-            "보성군\n" +
-            "화순군\n" +
-            "장흥군\n" +
-            "강진군\n" +
-            "해남군\n" +
-            "영암군\n" +
-            "무안군\n" +
-            "함평군\n" +
-            "영광군\n" +
-            "장성군\n" +
-            "완도군\n" +
-            "진도군\n" +
-            "신안군\n" +
-            "포항시\n" +
-            "포항시 남구\n" +
-            "포항시 북구\n" +
-            "경주시\n" +
-            "김천시\n" +
-            "안동시\n" +
-            "구미시\n" +
-            "영주시\n" +
-            "영천시\n" +
-            "상주시\n" +
-            "문경시\n" +
-            "경산시\n" +
-            "군위군\n" +
-            "의성군\n" +
-            "청송군\n" +
-            "영양군\n" +
-            "영덕군\n" +
-            "청도군\n" +
-            "고령군\n" +
-            "성주군\n" +
-            "칠곡군\n" +
-            "예천군\n" +
-            "봉화군\n" +
-            "울진군\n" +
-            "울릉군\n" +
-            "창원시\n" +
-            "창원시 의창구\n" +
-            "창원시 성산구\n" +
-            "창원시 마산합포구\n" +
-            "창원시 마산회원구\n" +
-            "창원시 진해구\n" +
-            "진주시\n" +
-            "통영시\n" +
-            "사천시\n" +
-            "사천남양출장\n" +
-            "김해시\n" +
-            "밀양시\n" +
-            "거제시\n" +
-            "양산시\n" +
-            "의령군\n" +
-            "함안군\n" +
-            "창녕군\n" +
-            "남해군\n" +
-            "하동군\n" +
-            "산청군\n" +
-            "함양군\n" +
-            "거창군\n" +
-            "합천군\n" +
-            "제주시\n" +
-            "서귀포시\n"
-
-        var gu =  gu_org.split("\n")
-
-        val code_org = "11110\n" +
-            "11140\n" +
-            "11170\n" +
-            "11200\n" +
-            "11215\n" +
-            "11230\n" +
-            "11260\n" +
-            "11290\n" +
-            "11305\n" +
-            "11320\n" +
-            "11350\n" +
-            "11380\n" +
-            "11410\n" +
-            "11440\n" +
-            "11470\n" +
-            "11500\n" +
-            "11530\n" +
-            "11545\n" +
-            "11560\n" +
-            "11590\n" +
-            "11620\n" +
-            "11650\n" +
-            "11680\n" +
-            "11710\n" +
-            "11740\n" +
-            "26140\n" +
-            "26170\n" +
-            "26200\n" +
-            "26230\n" +
-            "26260\n" +
-            "26290\n" +
-            "26320\n" +
-            "26350\n" +
-            "26380\n" +
-            "26410\n" +
-            "26470\n" +
-            "26500\n" +
-            "26530\n" +
-            "26710\n" +
-            "27260\n" +
-            "27290\n" +
-            "27710\n" +
-            "28115\n" +
-            "28116\n" +
-            "28177\n" +
-            "28185\n" +
-            "28200\n" +
-            "28237\n" +
-            "28245\n" +
-            "28265\n" +
-            "28710\n" +
-            "28720\n" +
-            "29200\n" +
-            "30200\n" +
-            "30230\n" +
-            "31710\n" +
-            "41110\n" +
-            "41111\n" +
-            "41113\n" +
-            "41115\n" +
-            "41117\n" +
-            "41130\n" +
-            "41131\n" +
-            "41133\n" +
-            "41135\n" +
-            "41150\n" +
-            "41170\n" +
-            "41171\n" +
-            "41173\n" +
-            "41190\n" +
-            "41210\n" +
-            "41220\n" +
-            "41250\n" +
-            "41270\n" +
-            "41271\n" +
-            "41273\n" +
-            "41280\n" +
-            "41281\n" +
-            "41285\n" +
-            "41287\n" +
-            "41290\n" +
-            "41310\n" +
-            "41360\n" +
-            "41370\n" +
-            "41390\n" +
-            "41410\n" +
-            "41430\n" +
-            "41450\n" +
-            "41460\n" +
-            "41461\n" +
-            "41463\n" +
-            "41465\n" +
-            "41480\n" +
-            "41500\n" +
-            "41550\n" +
-            "41570\n" +
-            "41590\n" +
-            "41610\n" +
-            "41630\n" +
-            "41650\n" +
-            "41670\n" +
-            "41800\n" +
-            "41820\n" +
-            "41830\n" +
-            "42110\n" +
-            "42130\n" +
-            "42150\n" +
-            "42170\n" +
-            "42190\n" +
-            "42210\n" +
-            "42230\n" +
-            "42720\n" +
-            "42730\n" +
-            "42750\n" +
-            "42760\n" +
-            "42770\n" +
-            "42780\n" +
-            "42790\n" +
-            "42800\n" +
-            "42810\n" +
-            "42820\n" +
-            "42830\n" +
-            "43110\n" +
-            "43111\n" +
-            "43112\n" +
-            "43113\n" +
-            "43114\n" +
-            "43130\n" +
-            "43150\n" +
-            "43720\n" +
-            "43730\n" +
-            "43740\n" +
-            "43745\n" +
-            "43750\n" +
-            "43760\n" +
-            "43770\n" +
-            "43800\n" +
-            "44130\n" +
-            "44131\n" +
-            "44133\n" +
-            "44150\n" +
-            "44180\n" +
-            "44200\n" +
-            "44210\n" +
-            "44230\n" +
-            "44250\n" +
-            "44270\n" +
-            "44710\n" +
-            "44760\n" +
-            "44770\n" +
-            "44790\n" +
-            "44800\n" +
-            "44810\n" +
-            "44825\n" +
-            "45110\n" +
-            "45111\n" +
-            "45113\n" +
-            "45118\n" +
-            "45130\n" +
-            "45140\n" +
-            "45145\n" +
-            "45180\n" +
-            "45190\n" +
-            "45210\n" +
-            "45710\n" +
-            "45720\n" +
-            "45730\n" +
-            "45740\n" +
-            "45750\n" +
-            "45770\n" +
-            "45790\n" +
-            "45800\n" +
-            "46110\n" +
-            "46130\n" +
-            "46150\n" +
-            "46170\n" +
-            "46230\n" +
-            "46710\n" +
-            "46720\n" +
-            "46730\n" +
-            "46770\n" +
-            "46780\n" +
-            "46790\n" +
-            "46800\n" +
-            "46810\n" +
-            "46820\n" +
-            "46830\n" +
-            "46840\n" +
-            "46860\n" +
-            "46870\n" +
-            "46880\n" +
-            "46890\n" +
-            "46900\n" +
-            "46910\n" +
-            "47110\n" +
-            "47111\n" +
-            "47113\n" +
-            "47130\n" +
-            "47150\n" +
-            "47170\n" +
-            "47190\n" +
-            "47210\n" +
-            "47230\n" +
-            "47250\n" +
-            "47280\n" +
-            "47290\n" +
-            "47720\n" +
-            "47730\n" +
-            "47750\n" +
-            "47760\n" +
-            "47770\n" +
-            "47820\n" +
-            "47830\n" +
-            "47840\n" +
-            "47850\n" +
-            "47900\n" +
-            "47920\n" +
-            "47930\n" +
-            "47940\n" +
-            "48120\n" +
-            "48121\n" +
-            "48123\n" +
-            "48125\n" +
-            "48127\n" +
-            "48129\n" +
-            "48170\n" +
-            "48220\n" +
-            "48240\n" +
-            "48245\n" +
-            "48250\n" +
-            "48270\n" +
-            "48310\n" +
-            "48330\n" +
-            "48720\n" +
-            "48730\n" +
-            "48740\n" +
-            "48840\n" +
-            "48850\n" +
-            "48860\n" +
-            "48870\n" +
-            "48880\n" +
-            "48890\n" +
-            "50110\n" +
-            "50130\n"
-
-        val code = code_org.split("\n")
-        return ""
-
+        return call.execute().body()?.toModels() ?: emptyList()
     }
 
     @GetMapping
     fun getSoldList(
         @ModelAttribute request: ApartSalesRequest
-    ): ApartResponse {
+    ): ApartModel {
         request.validate()
         val call = apiServiceForCall(API_URL_FOR_APART)
             .getData(request.code, request.dealYmd, ApartSalesRequest.KEY)
         val response = call.execute().body()?.body?.items?.item
 
         return response?.let {
-            ApartResponse(
+            ApartModel(
                 response.sortedByDescending { it.day }.map {
                     ApartSalesInfo.createBy(it, false)
                 }
             )
-        } ?: ApartResponse()
+        } ?: ApartModel()
     }
 
     @GetMapping("/subdivision")
     fun getSoldSubdivisions(
         @ModelAttribute request: SubdivisionsRequest
-    ): ApartResponse {
+    ): ApartModel {
         request.validate()
+
         val call = apiServiceForCall(API_URL_FOR_SUBDIVISION)
             .getSubdivisions(request.code, request.dealYmd, ApartSalesRequest.KEY)
         val response = call.execute().body()?.body?.items?.item
 
         return response?.let {
-            ApartResponse(
+            ApartModel(
                 response.sortedByDescending { it.day }.map {
                     ApartSalesInfo.createBy(it, true)
                 }
             )
-        } ?: ApartResponse()
+        } ?: ApartModel()
     }
 
     private fun apiServiceForCall(apiUrl: String): ApartApiService {
@@ -805,8 +77,18 @@ class OurTownController {
         return retrofit.create(ApartApiService::class.java)
     }
 
+    private fun areaCodeApiServiceForCall(apiUrl: String): AreaCodeApiService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(apiUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(AreaCodeApiService::class.java)
+    }
+
     companion object {
         private const val API_URL_FOR_APART = "http://openapi.molit.go.kr:8081"
         private const val API_URL_FOR_SUBDIVISION = "http://openapi.molit.go.kr"
+        private const val API_URL_FOR_AREACODE = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app"
     }
 }

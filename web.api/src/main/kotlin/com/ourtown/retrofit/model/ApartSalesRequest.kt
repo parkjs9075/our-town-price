@@ -17,6 +17,6 @@ data class ApartSalesRequest(
     }
 
     companion object {
-        const val KEY = "Jrz2abzS5ivDmhg9LuMf5sIgK5YRHDXKJtC2GH/nkAdZgzNCYcDIulEom1Dsvm9Ry9UccXY/xDMuPnbWc5v7OQ=="
+        const val KEY = "A3PCwVME1WkFxWJWS7Intl1fPaRZB0U04F5AdjLtzqGTJ7XdsK+wQm37xhBCPTyhdjXynoaQASmj8YYzF1gu+w=="
     }
 }

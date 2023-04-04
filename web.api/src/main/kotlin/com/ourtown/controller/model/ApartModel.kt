@@ -1,9 +1,9 @@
-package com.ourtown.retrofit.model
+package com.ourtown.controller.model
 
-import org.simpleframework.xml.Element
+import com.ourtown.retrofit.model.ItemInfo
 import java.time.LocalDate
 
-data class ApartResponse(
+data class ApartModel(
     val list: List<ApartSalesInfo> = emptyList()
 ) {
     val apartNames by lazy {

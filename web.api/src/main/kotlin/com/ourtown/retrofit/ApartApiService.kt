@@ -1,13 +1,9 @@
 package com.ourtown.retrofit
 
-import com.ourtown.retrofit.model.ApartResponse
-import com.ourtown.retrofit.model.ApartSalesRequest
 import com.ourtown.retrofit.model.ApartSalesResponse
-import org.springframework.web.bind.annotation.RequestParam
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface  ApartApiService {
     @GET("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade")
